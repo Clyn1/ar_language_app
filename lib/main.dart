@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'src/views/welcome_page.dart';
+import 'src/views/home_page.dart';
 
 void main() {
   runApp(LanguageARApp());
@@ -13,7 +14,11 @@ class LanguageARApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home: WelcomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => WelcomePage(),
+        '/home': (context) => HomePage(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }
