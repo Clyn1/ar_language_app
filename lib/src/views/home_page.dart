@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'lessons/fruit_lesson_page.dart'; // ✅ Fruits lesson import
-import 'lessons/animals_lesson_page.dart'; // ✅ Animals lesson import
+import 'lessons/fruit_lesson_page.dart';
+import 'lessons/animals_lesson_page.dart';
+import 'lessons/objects_lesson_page.dart'; // 👈 Create this file
+import 'lessons/colors_lesson_page.dart';  // 👈 Create this file
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF8EFFD), // Soft purple background
+      backgroundColor: Color(0xFFF8EFFD),
       appBar: AppBar(
         title: const Text('Learn with AR'),
         centerTitle: true,
@@ -24,22 +26,34 @@ class HomePage extends StatelessWidget {
             _buildCategoryCard(
               icon: Icons.apple,
               label: 'Fruits',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => FruitLessonPage()),
-                );
-              },
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => FruitLessonPage()),
+              ),
             ),
             _buildCategoryCard(
               icon: Icons.pets,
               label: 'Animals',
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => AnimalsLessonPage()),
-                );
-              },
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => AnimalsLessonPage()),
+              ),
+            ),
+            _buildCategoryCard(
+              icon: Icons.chair_alt,
+              label: 'Objects',
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => ObjectsLessonPage()),
+              ),
+            ),
+            _buildCategoryCard(
+              icon: Icons.color_lens,
+              label: 'Colors',
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => ColorsLessonPage()),
+              ),
             ),
           ],
         ),
