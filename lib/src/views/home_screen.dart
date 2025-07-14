@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ar_language_app/src/views/lessons/fruit_lesson_page.dart';
+import 'package:ar_language_app/src/views/lessons/animals_lesson_page.dart';
 
 class HomeScreen extends StatelessWidget {
   final List<Map<String, dynamic>> categories = [
@@ -10,9 +12,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFF8F1FF),
       appBar: AppBar(
         title: Text('Learn with AR'),
         centerTitle: true,
+        backgroundColor: Colors.deepPurple,
       ),
       body: GridView.builder(
         padding: const EdgeInsets.all(16),
@@ -25,9 +29,25 @@ class HomeScreen extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           final category = categories[index];
+          final String title = category['title'].toString().toLowerCase();
+
           return GestureDetector(
             onTap: () {
-              // Later: Navigate to AR view
+              if (title == 'fruits') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => FruitLessonPage()),
+                );
+              } else if (title == 'animals') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => AnimalsLessonPage()),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text('${category['title']} tapped (not implemented yet)')),
+                );
+              }
             },
             child: Card(
               elevation: 4,
@@ -38,7 +58,10 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Icon(category['icon'], size: 48, color: Colors.deepPurple),
                     SizedBox(height: 8),
-                    Text(category['title'], style: TextStyle(fontSize: 18)),
+                    Text(
+                      category['title'],
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    ),
                   ],
                 ),
               ),

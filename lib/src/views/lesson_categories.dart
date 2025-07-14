@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'lessons/fruit_lesson_page.dart'; // ✅ Import FruitLessonPage
+import 'lessons/fruit_lesson_page.dart';
+import 'lessons/animals_lesson_page.dart'; // ✅ Import AnimalsLessonPage
 
 class LessonCategories extends StatelessWidget {
   final List<Map<String, dynamic>> categories = [
@@ -62,6 +63,11 @@ class LessonCategories extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => FruitLessonPage()),
+                );
+              } else if (category['title'] == 'Animals') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => AnimalsLessonPage()),
                 );
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(

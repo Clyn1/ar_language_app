@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'lessons/fruit_lesson_page.dart'; // 👈 correct import path
+import 'lessons/fruit_lesson_page.dart'; // ✅ Fruits lesson import
+import 'lessons/animals_lesson_page.dart'; // ✅ Animals lesson import
 
 class HomePage extends StatelessWidget {
   @override
@@ -34,8 +35,9 @@ class HomePage extends StatelessWidget {
               icon: Icons.pets,
               label: 'Animals',
               onTap: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Animals tapped (not implemented yet)')),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => AnimalsLessonPage()),
                 );
               },
             ),

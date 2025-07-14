@@ -15,7 +15,7 @@ class _FruitLessonPageState extends State<FruitLessonPage> {
       'image': 'https://cdn-icons-png.flaticon.com/512/415/415682.png',
     },
     {
-      'name': 'Banana',
+      'name': 'Strawberry',
       'image': 'https://cdn-icons-png.flaticon.com/512/590/590685.png',
     },
     {
