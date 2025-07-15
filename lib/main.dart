@@ -1,3 +1,5 @@
+// lib/main.dart
+
 import 'package:flutter/material.dart';
 import 'src/views/welcome_page.dart';
 import 'src/views/home_page.dart';
@@ -13,7 +15,13 @@ class LanguageARApp extends StatelessWidget {
       title: 'Language AR App',
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
+        brightness: Brightness.light,
       ),
+      darkTheme: ThemeData(
+        primarySwatch: Colors.deepPurple,
+        brightness: Brightness.dark,
+      ),
+      themeMode: ThemeMode.system,
       initialRoute: '/',
       routes: {
         '/': (context) => WelcomePage(),

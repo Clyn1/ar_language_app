@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'lessons/fruit_lesson_page.dart';
-import 'lessons/animals_lesson_page.dart'; // ✅ Import AnimalsLessonPage
+import 'lessons/animals_lesson_page.dart';
+import 'lessons/vehicles_lesson_page.dart';
+import 'lessons/body_parts_lesson_page.dart';
 
 class LessonCategories extends StatelessWidget {
   final List<Map<String, dynamic>> categories = [
@@ -57,18 +59,18 @@ class LessonCategories extends StatelessWidget {
         ),
         itemBuilder: (context, index) {
           final category = categories[index];
+
           return GestureDetector(
             onTap: () {
+              // ✅ Route matching
               if (category['title'] == 'Fruits') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => FruitLessonPage()),
-                );
+                Navigator.push(context, MaterialPageRoute(builder: (_) => FruitLessonPage()));
               } else if (category['title'] == 'Animals') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => AnimalsLessonPage()),
-                );
+                Navigator.push(context, MaterialPageRoute(builder: (_) => AnimalsLessonPage()));
+              } else if (category['title'] == 'Vehicles') {
+                Navigator.push(context, MaterialPageRoute(builder: (_) => VehiclesLessonPage()));
+              } else if (category['title'] == 'Body Parts') {
+                Navigator.push(context, MaterialPageRoute(builder: (_) => BodyPartsLessonPage()));
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('${category['title']} tapped!')),
