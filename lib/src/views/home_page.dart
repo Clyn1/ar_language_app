@@ -6,6 +6,7 @@ import 'lessons/animals_lesson_page.dart';
 import 'lessons/vehicles_lesson_page.dart';
 import 'lessons/body_parts_lesson_page.dart';
 import 'ar_flashcard_scanner.dart'; // ✅ Correct path since it's in the same folder
+import 'lessons/fruit_quiz_page.dart';
 
 class HomePage extends StatelessWidget {
   @override
