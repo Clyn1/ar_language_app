@@ -6,7 +6,7 @@ class FruitQuizPage extends StatefulWidget {
 }
 
 class _FruitQuizPageState extends State<FruitQuizPage> {
-  final List<Map<String, dynamic>> questions = [
+  final List<Map<String, dynamic>> _questions = [
     {
       'question': 'Which one is a red fruit?',
       'options': ['Banana', 'Apple', 'Orange'],
@@ -19,66 +19,80 @@ class _FruitQuizPageState extends State<FruitQuizPage> {
     },
   ];
 
-  int currentQuestion = 0;
-  int score = 0;
+  int _currentQuestionIndex = 0;
+  int _score = 0;
 
-  void checkAnswer(String selected) {
-    final correct = questions[currentQuestion]['answer'];
-    if (selected == correct) {
-      score++;
+  void _checkAnswer(String selectedOption) {
+    final correctAnswer = _questions[_currentQuestionIndex]['answer'];
+    if (selectedOption == correctAnswer) {
+      _score++;
     }
 
-    if (currentQuestion < questions.length - 1) {
+    if (_currentQuestionIndex < _questions.length - 1) {
       setState(() {
-        currentQuestion++;
+        _currentQuestionIndex++;
       });
     } else {
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          title: Text('Quiz Completed!'),
-          content: Text('You got $score out of ${questions.length} correct!'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.pop(context); // close dialog
-                Navigator.pop(context); // back to fruit lesson
-              },
-              child: Text('OK'),
-            )
-          ],
-        ),
-      );
+      _showResultDialog();
     }
+  }
+
+  void _showResultDialog() {
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('Quiz Completed!'),
+        content: Text('You got $_score out of ${_questions.length} correct!'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // Close dialog
+              Navigator.pop(context); // Back to previous screen
+            },
+            child: const Text('OK'),
+          )
+        ],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final question = questions[currentQuestion];
+    final currentQuestion = _questions[_currentQuestionIndex];
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Fruit Quiz'),
+        title: const Text('Fruit Quiz'),
         backgroundColor: Colors.deepPurple,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              question['question'],
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              'Question ${_currentQuestionIndex + 1}/${_questions.length}',
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
             ),
-            SizedBox(height: 30),
-            ...question['options'].map<Widget>((opt) {
-              return ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.deepPurple,
-                  onPrimary: Colors.white,
-                  minimumSize: Size.fromHeight(50),
+            const SizedBox(height: 10),
+            Text(
+              currentQuestion['question'],
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 30),
+            ...currentQuestion['options'].map<Widget>((option) {
+              return Container(
+                margin: const EdgeInsets.only(bottom: 12),
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.deepPurple,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                  ),
+                  onPressed: () => _checkAnswer(option),
+                  child: Text(option),
                 ),
-                onPressed: () => checkAnswer(opt),
-                child: Text(opt),
               );
             }).toList(),
           ],
