@@ -1,33 +1,18 @@
-// lib/main.dart
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'src/views/welcome_page.dart';
-import 'src/views/home_page.dart';
 
-void main() {
-  runApp(LanguageARApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
 }
 
-class LanguageARApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Language AR App',
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        brightness: Brightness.light,
-      ),
-      darkTheme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        brightness: Brightness.dark,
-      ),
-      themeMode: ThemeMode.system,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => WelcomePage(),
-        '/home': (context) => HomePage(),
-      },
-      debugShowCheckedModeBanner: false,
+      title: 'AR Language App',
+      home: LoginPage(), // Replace with your auth page
     );
   }
 }
