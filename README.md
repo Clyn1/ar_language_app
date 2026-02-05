@@ -1,4 +1,4 @@
-<<< HEAD
+<< HEAD
 # ar_language_app
 
 A new Flutter project.
